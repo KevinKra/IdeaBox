@@ -4,7 +4,7 @@
 // Query select the card container section and assign it to var cardContainer
 
 // Add a click event listener to saveBtn with a function called saveIdea
-// Add a click event listener to the cardContainer with a function called ?
+// Add a click event listener to the cardContainer with a function called buttonChecker
 
 // Create an empty ideas array to hold all the new idea instances
 
@@ -31,3 +31,11 @@
   // Targeting cardContainer use add Inner HTML to add a card using a template literal
   // Interpolate ideaObj.title and ideaObj.body into appropriate places in template literal
 
+// buttonChecker(e) function
+  // If the event target's id is equal to the up button's id then...
+    // updateQuality()
+  // If the event target's id is equal to the down button's id then...
+    // updateQuality()
+  // If the event target's id is equal to the delete button's id then...
+    // Delete card from local storage using deleteFromStorage(id)
+    // Use parent element (maybe multiple times) on the event target to target the card and remove it
