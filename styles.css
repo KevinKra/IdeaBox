@@ -1,0 +1,47 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+main {
+	border: 1px solid red;
+}
+
+.header-content {
+	border: 1px solid red;
+	background-color: #322A30;
+	height: 200px;
+}
+
+.top-nav {
+	border: 1px solid red;
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+	width: 70%;
+	align-items: center;
+}
+
+.header-title {
+	display: flex;
+}
+
+.header-1 {
+	color: #AFA5CD;
+}
+
+.header-2 {
+	color: #fff;
+}
+
+.search-bar {
+	height: 2rem;
+}
+
+.input-content {
+	border: 1px solid red;
+}
+
+.output-content {
+	border: 1px solid red;
+}
+
