@@ -76,6 +76,10 @@ input, textarea, .idea-card {
 	margin-bottom: .5rem;
 }
 
+.form-title-input {
+	min-height: 45px;
+}
+
 .btn-save-idea {
 	background-color: #6E646B;
 	border: 0;
