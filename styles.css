@@ -1,0 +1,120 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+body {
+}
+
+main {
+	
+}
+
+/* === header content ===*/
+.header-content {
+	background-color: #322A30;
+}
+
+.top-nav {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 auto;
+	width: 70%;
+	align-items: center;
+}
+
+.header-title {
+	display: flex;
+}
+
+.header-1 {
+	color: #AFA5CD;
+}
+
+.header-2 {
+	color: #fff;
+}
+
+.search-bar {
+	height: 2rem;
+}
+
+/* === body content ===*/
+.input-content {
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #EDF2F2;
+}
+
+.input-form {
+	display: flex;
+	width: 30%;
+	min-width: 550px;
+	flex-direction: column;
+}
+
+.input-form  > label {
+	margin-top: 1rem;
+}
+
+.input-header {
+	margin-bottom: .5rem;
+}
+
+.btn-save-idea {
+	margin: 1rem 0;
+	padding: .5rem 0;
+}
+
+
+/* === footer content ===*/
+.output-content {
+	margin: 1rem 0;
+}
+
+.idea-card {
+	margin: 0 auto;
+	border: 2px solid #555;
+	width: 30%;
+	min-width: 550px;
+}
+
+.idea-card-footer {
+	border-top: 2px solid #555;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.card-footer-status {
+	display: flex;
+	align-items: center;
+}
+
+.card-footer-status button {
+	margin: 0 .7rem;
+}
+
+.idea-card-title, .idea-card-paragraph {
+	padding: 0 1rem;
+}
+
+.btn-2 {
+	height: 25px;
+	width: 25px;
+	border-radius: 50%;
+	background-color: #D5D2D8;
+}
+
+.close-idea-card {
+	margin-right: .7rem;
+}
+
+
+
+
+
+
+
+
+
