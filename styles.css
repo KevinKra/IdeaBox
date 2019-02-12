@@ -47,7 +47,27 @@ input, textarea, .idea-card {
 }
 
 .search-bar {
-	height: 2rem;
+	color: #D2CCCD;
+	font-size: 1.3em;
+  padding: 5px 5px 5px 10px;
+
+}
+
+.top-nav-form {
+	align-items: center;
+	background: #D2CCCD;
+	border-radius: 5px;
+	display: flex;
+}
+
+.top-nav-form input {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.fa-search {
+	color: white;
+  margin: 5px 7.5px 5px 5px;
 }
 
 /* === body content ===*/
