@@ -14,6 +14,7 @@ class Idea {
     // Set the stringified idea object in local storage using the idea object's id as the key
   }
   deleteFromStorage(id) {
+    arry.push(this);
     // localStorage.removeItem(id)
   }
   updateContent() {
