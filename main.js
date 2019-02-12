@@ -1,18 +1,38 @@
+var titleInput = document.querySelector('#title-input');
+var bodyInput = document.querySelector('#body-textarea');
+var savBtn = dcoument.querySelector('#btn-save-idea');
+var cardContainer = document.querySelector('.output-content');
+
 // Query select the idea title input box and assign it to var titleInput
 // Query select the idea body input box and assign it to var bodyInput
 // Query select the save button and assign it to var saveBtn
 // Query select the card container section and assign it to var cardContainer
 
+
+savBtn.addEventListener('click', saveIdea);
+cardContainer.addEventListener('click', buttonChecker);
 // Add a click event listener to saveBtn with a function called saveIdea
 // Add a click event listener to the cardContainer with a function called buttonChecker
 
+var ideas = [];
 // Create an empty ideas array to hold all the new idea instances
+
 
 // onLoad function
   // Retrieve JSON ideas array from local storage
   // Parse the ideas array and assign it to the global ideas array variable
   // For every idea in ideas array loop
     // create an idea card for each idea
+
+function saveIdea() {
+  var title = titleInput.value;
+  var body = bodyInput.value;
+  var idea = new Idea(title, body);
+  ideas.push(idea);
+  createIdeaCard(ideaObj);
+  clearInputValues(title, body); 
+}
+
 
 // saveIdea function
   // Take the value of the titleInput and assign it to var title
@@ -23,6 +43,10 @@
   // Call clearInputValue function with body as argument
 
 
+function clearInputValues(title, body) {
+  title.value = "";
+  body.value = "";
+}
 // clearInputValue(value) function
   // Set given value to empty string
 
