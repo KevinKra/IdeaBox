@@ -1,6 +1,6 @@
 class Idea {
   constructor(title, body) {
-    this.id = id;
+    this.id = 0;
     this.title = title;
     this.body = body;
     this.quality = 'swill';
