@@ -1,15 +1,17 @@
 *, *:before, *:after {
   box-sizing: border-box;
 }
-
-main {
-	border: 1px solid red;
+body {
+	border: 1px solid green;
 }
 
+main {
+	
+}
+
+/* === header content ===*/
 .header-content {
-	border: 1px solid red;
 	background-color: #322A30;
-	height: 200px;
 }
 
 .top-nav {
@@ -37,11 +39,37 @@ main {
 	height: 2rem;
 }
 
+/* === body content ===*/
 .input-content {
-	border: 1px solid red;
+	border: 1px dashed red;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
+.input-form {
+	display: flex;
+	width: 30%;
+	flex-direction: column;
+}
+
+.input-form  > label {
+	margin-top: 1rem;
+}
+
+.input-header {
+	margin-bottom: .5rem;
+}
+
+.btn-save-idea {
+	margin: 1rem 0;
+	padding: .5rem 0;
+}
+
+
+/* === footer content ===*/
 .output-content {
-	border: 1px solid red;
+	border: 1px solid blue;
 }
 
