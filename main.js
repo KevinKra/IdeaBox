@@ -29,6 +29,7 @@ function saveIdea() {
   var body = bodyInput.value;
   var idea = new Idea(title, body);
   ideas.push(idea);
+  
   createIdeaCard(idea);
   clearInputValues(title, body); 
 }
@@ -52,25 +53,39 @@ function clearInputValues(title, body) {
 
 
 function createIdeaCard(ideaObj) {
-  console.log("test");
-  cardContainer.innerHTML += `<article class="idea-card">
+  cardContainer.innerHTML += `<article class="idea-card" data-id="0">
       <h2 class="idea-card-title">${ideaObj.title}</h2>
       <p class="idea-card-paragraph">${ideaObj.body}</p>
       <section class="idea-card-footer">
         <section class="card-footer-status">
-          <image class="btn btn-2 increase-quality" src="images/upvote.svg" alt="upvote card button" />
-          <image class="btn btn-2 decrease-quality" src="images/downvote.svg" alt="downvote card button" />
+          <image class="btn btn-2" id="increase-quality" src="images/upvote.svg" alt="upvote card button" />
+          <image class="btn btn-2" id="decrease-quality" src="images/downvote.svg" alt="downvote card button" />
           <p>Quality:</p>
           <p class="quality-current">&nbsp${ideaObj.quality}</p>
         </section>
-        <img class="btn btn-2 close-idea-card" src="images/delete.svg" alt="delete card button"/>
+        <img class="btn btn-2" id="close-idea-card" src="images/delete.svg" alt="delete card button"/>
       </section>
     </article>`
+    console.log()
 }
 // createIdeaCard(ideaObj) function
   // Targeting cardContainer use add Inner HTML to add a card using a template literal
   // Interpolate ideaObj.title and ideaObj.body into appropriate places in template literal
 
+
+function buttonChecker(e){
+  e.preventDefault();
+  if (e.target.id === 'close-idea-card') {
+      e.target.parentElement.parentElement.remove();
+  } 
+  if (e.target.id === 'increase-quality') {
+      console.log(e.target.parentElement.parentElement.parentElement.dataset.id);
+      // updateQuality();
+  }
+  if (e.target.id === 'decrease-quality') {
+      // updateQuality();
+  }
+}
 // buttonChecker(e) function
   // If the event target's id is equal to the up button's id then...
     // updateQuality()
