@@ -1,6 +1,6 @@
 var titleInput = document.querySelector('#title-input');
 var bodyInput = document.querySelector('#body-textarea');
-var savBtn = dcoument.querySelector('#btn-save-idea');
+var savBtn = document.querySelector('.btn-save-idea');
 var cardContainer = document.querySelector('.output-content');
 
 // Query select the idea title input box and assign it to var titleInput
@@ -29,7 +29,7 @@ function saveIdea() {
   var body = bodyInput.value;
   var idea = new Idea(title, body);
   ideas.push(idea);
-  createIdeaCard(ideaObj);
+  createIdeaCard(idea);
   clearInputValues(title, body); 
 }
 
@@ -51,6 +51,22 @@ function clearInputValues(title, body) {
   // Set given value to empty string
 
 
+function createIdeaCard(ideaObj) {
+  console.log("test");
+  cardContainer.innerHTML += `<article class="idea-card">
+      <h2 class="idea-card-title">${ideaObj.title}</h2>
+      <p class="idea-card-paragraph">${ideaObj.body}</p>
+      <section class="idea-card-footer">
+        <section class="card-footer-status">
+          <image class="btn btn-2 increase-quality" src="images/upvote.svg" alt="upvote card button" />
+          <image class="btn btn-2 decrease-quality" src="images/downvote.svg" alt="downvote card button" />
+          <p>Quality:</p>
+          <p class="quality-current">&nbsp${ideaObj.quality}</p>
+        </section>
+        <img class="btn btn-2 close-idea-card" src="images/delete.svg" alt="delete card button"/>
+      </section>
+    </article>`
+}
 // createIdeaCard(ideaObj) function
   // Targeting cardContainer use add Inner HTML to add a card using a template literal
   // Interpolate ideaObj.title and ideaObj.body into appropriate places in template literal
