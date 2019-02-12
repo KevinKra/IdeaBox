@@ -49,6 +49,7 @@ main {
 .input-form {
 	display: flex;
 	width: 30%;
+	min-width: 550px;
 	flex-direction: column;
 }
 
@@ -73,11 +74,13 @@ main {
 
 .idea-card {
 	margin: 0 auto;
-	border: 2px solid #444;
+	border: 2px solid #555;
 	width: 30%;
+	min-width: 550px;
 }
 
 .idea-card-footer {
+	border-top: 2px solid #555;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -100,7 +103,13 @@ main {
 	height: 25px;
 	width: 25px;
 	border-radius: 50%;
+	background-color: #D5D2D8;
 }
+
+.close-idea-card {
+	margin-right: .7rem;
+}
+
 
 
 
