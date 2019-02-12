@@ -9,17 +9,23 @@ main {
 	
 }
 
+input, textarea, .idea-card {
+  border: 2px solid #D2CCCD;
+  border-radius: 5px;
+  resize: none;
+}
+
 /* === header content ===*/
 .header-content {
 	background-color: #322A30;
 }
 
 .top-nav {
+	align-items: center;
 	display: flex;
 	justify-content: space-between;
 	margin: 0 auto;
 	width: 70%;
-	align-items: center;
 }
 
 .header-title {
@@ -40,11 +46,11 @@ main {
 
 /* === body content ===*/
 .input-content {
-	margin: 0 auto;
-	display: flex;
 	align-items: center;
-	justify-content: center;
 	background-color: #EDF2F2;
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
 }
 
 .input-form {
@@ -75,13 +81,12 @@ main {
 
 .idea-card {
 	margin: 0 auto;
-	border: 2px solid #555;
 	width: 30%;
 	min-width: 550px;
 }
 
 .idea-card-footer {
-	border-top: 2px solid #555;
+	border-top: 2px solid #D2CCCD;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
