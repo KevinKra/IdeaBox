@@ -8,7 +8,11 @@ var cardContainer = document.querySelector('.output-content');
 // Query select the save button and assign it to var saveBtn
 // Query select the card container section and assign it to var cardContainer
 
-var ideas =  [];
+var stringifiedIdeas = localStorage.getItem('ideas') || '[]';
+ideas = JSON.parse(stringifiedIdeas);
+var ideaCounter = 0;
+//ideaCounter = JSON.parse(ideaCounter);
+
 savBtn.addEventListener('click', saveIdea);
 cardContainer.addEventListener('click', buttonChecker);
 // Add a click event listener to saveBtn with a function called saveIdea
@@ -27,8 +31,8 @@ function saveIdea() {
   var title = titleInput.value;
   var body = bodyInput.value;
   var idea = new Idea(title, body);
-  idea.saveToStorage(ideas);
   createIdeaCard(idea);
+  idea.saveToStorage();
   clearInputValues(title, body); 
 }
 
@@ -51,25 +55,38 @@ function clearInputValues(title, body) {
 
 
 function createIdeaCard(ideaObj) {
-  cardContainer.innerHTML += `<article class="idea-card" data-id="0">
-      <h2 class="idea-card-title">${ideaObj.title}</h2>
-      <p class="idea-card-paragraph">${ideaObj.body}</p>
-      <section class="idea-card-footer">
-        <section class="card-footer-status">
-          <image class="btn btn-2" id="increase-quality" src="images/upvote.svg" alt="upvote card button" />
-          <image class="btn btn-2" id="decrease-quality" src="images/downvote.svg" alt="downvote card button" />
-          <p>Quality:</p>
-          <p class="quality-current">&nbsp${ideaObj.quality}</p>
-        </section>
-        <img class="btn btn-2" id="close-idea-card" src="images/delete.svg" alt="delete card button"/>
-      </section>
-    </article>`
-    console.log()
+  var card = document.createElement('article');
+  card.className += "idea-card";
+  card.dataset.id = ideaObj.id;
+  incrementCounter();
+  storeCounter();
+  var html = `
+  <h2 class="idea-card-title">${ideaObj.title}</h2>
+  <p class="idea-card-paragraph">${ideaObj.body}</p>
+  <section class="idea-card-footer">
+    <section class="card-footer-status">
+      <image class="btn btn-2" id="increase-quality" src="images/upvote.svg" alt="upvote card button" />
+      <image class="btn btn-2" id="decrease-quality" src="images/downvote.svg" alt="downvote card button" />
+      <p>Quality:</p>
+      <p class="quality-current">&nbsp${ideaObj.quality}</p>
+    </section>
+    <img class="btn btn-2" id="close-idea-card" src="images/delete.svg" alt="delete card button"/>
+  </section>`
+  card.innerHTML = html;
+  cardContainer.appendChild(card);
 }
 // createIdeaCard(ideaObj) function
   // Targeting cardContainer use add Inner HTML to add a card using a template literal
   // Interpolate ideaObj.title and ideaObj.body into appropriate places in template literal
 
+function incrementCounter() {
+  ideaCounter++;
+}
+
+function storeCounter() {
+  var stringifiedCounter = JSON.stringify(ideaCounter);
+  localStorage.setItem('ideaCounter', stringifiedCounter);
+}
 
 function buttonChecker(e){
   e.preventDefault();
