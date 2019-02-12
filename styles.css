@@ -130,6 +130,10 @@ input, textarea, .idea-card {
 	justify-content: space-between;
 }
 
+.idea-card-footer img {
+	cursor: pointer;
+}
+
 .card-footer-status {
 	align-items: center;
 	color: #7C7879;
@@ -137,7 +141,7 @@ input, textarea, .idea-card {
 	font-weight: 800;
 }
 
-.card-footer-status button {
+.card-footer-status img {
 	margin: 0 .7rem;
 }
 
