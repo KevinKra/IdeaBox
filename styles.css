@@ -9,6 +9,12 @@ main {
 	
 }
 
+.header-title h1 {
+	font-size: 2.5em;
+	letter-spacing: .5px;
+  padding-right: 4px;
+}
+
 input, textarea, .idea-card {
   border: 2px solid #D2CCCD;
   border-radius: 5px;
@@ -66,16 +72,19 @@ input, textarea, .idea-card {
 
 .input-header {
 	color: #6E646B;
+	font-size: 1.35em;
 	margin-bottom: .5rem;
 }
 
 .btn-save-idea {
+	background-color: #6E646B;
 	border: 0;
+  color: white;
+  cursor: pointer;
+	font-size: 1.35em;
 	font-weight: 800;
 	margin: 1rem 0;
 	padding: .5rem 0;
-  background-color: #6E646B;
-  color: white;
 }
 
 
