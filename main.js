@@ -11,12 +11,20 @@ var cardContainer = document.querySelector('.output-content');
 var ideas =  [];
 savBtn.addEventListener('click', saveIdea);
 cardContainer.addEventListener('click', buttonChecker);
+onLoad();
 // Add a click event listener to saveBtn with a function called saveIdea
 // Add a click event listener to the cardContainer with a function called buttonChecker
 
 // Create an empty ideas array to hold all the new idea instances
 
 
+function onLoad() {
+  var stringifiedIdeas = localStorage.getItem('ideas');
+  var parsedIdeas = JSON.parse(stringifiedIdeas);
+  for (var i = 0; i < parsedIdeas.length; i++) {
+    createIdeaCard(parsedIdeas[i]);
+  }
+}
 // onLoad function
   // Retrieve JSON ideas array from local storage
   // Parse the ideas array and assign it to the global ideas array variable
