@@ -55,9 +55,9 @@ input, textarea, .idea-card {
 
 .input-form {
 	display: flex;
-	width: 30%;
-	min-width: 550px;
 	flex-direction: column;
+	min-width: 550px;
+	width: 30%;
 }
 
 .input-form  > label {
@@ -65,12 +65,17 @@ input, textarea, .idea-card {
 }
 
 .input-header {
+	color: #6E646B;
 	margin-bottom: .5rem;
 }
 
 .btn-save-idea {
+	border: 0;
+	font-weight: 800;
 	margin: 1rem 0;
 	padding: .5rem 0;
+  background-color: #6E646B;
+  color: white;
 }
 
 
@@ -81,20 +86,22 @@ input, textarea, .idea-card {
 
 .idea-card {
 	margin: 0 auto;
-	width: 30%;
 	min-width: 550px;
+	width: 30%;
 }
 
 .idea-card-footer {
+	align-items: center;
 	border-top: 2px solid #D2CCCD;
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
 }
 
 .card-footer-status {
-	display: flex;
 	align-items: center;
+	color: #7C7879;
+	display: flex;
+	font-weight: 800;
 }
 
 .card-footer-status button {
@@ -105,11 +112,19 @@ input, textarea, .idea-card {
 	padding: 0 1rem;
 }
 
+.idea-card-title {
+	color: #6E646B;
+}
+
+.idea-card-paragraph {
+	color: #7C7879;
+}
+
 .btn-2 {
+	background-color: #D5D2D8;
+	border-radius: 50%;
 	height: 25px;
 	width: 25px;
-	border-radius: 50%;
-	background-color: #D5D2D8;
 }
 
 .close-idea-card {
