@@ -5,7 +5,11 @@ class Idea {
     this.body = body;
     this.quality = 'swill';
   }
-  saveToStorage(ideaObj) {
+  saveToStorage(arry) {
+    arry.push(this);
+    var stringifiedIdeas = JSON.stringify(arry);
+    localStorage.setItem("ideas", stringifiedIdeas);
+    console.log(JSON.stringify(arry));
     // JSON.stringify the idea object and assign to variable
     // Set the stringified idea object in local storage using the idea object's id as the key
   }

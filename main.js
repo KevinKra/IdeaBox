@@ -8,13 +8,12 @@ var cardContainer = document.querySelector('.output-content');
 // Query select the save button and assign it to var saveBtn
 // Query select the card container section and assign it to var cardContainer
 
-
+var ideas =  [];
 savBtn.addEventListener('click', saveIdea);
 cardContainer.addEventListener('click', buttonChecker);
 // Add a click event listener to saveBtn with a function called saveIdea
 // Add a click event listener to the cardContainer with a function called buttonChecker
 
-var ideas = [];
 // Create an empty ideas array to hold all the new idea instances
 
 
@@ -28,8 +27,7 @@ function saveIdea() {
   var title = titleInput.value;
   var body = bodyInput.value;
   var idea = new Idea(title, body);
-  ideas.push(idea);
-  
+  idea.saveToStorage(ideas);
   createIdeaCard(idea);
   clearInputValues(title, body); 
 }
