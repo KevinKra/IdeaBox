@@ -114,6 +114,13 @@ input, textarea, .idea-card {
 	padding: .5rem 0;
 }
 
+.btn-save-idea:hover{
+	background-color: #524649;
+}
+
+.disabled {
+	
+}
 
 /* === footer content ===*/
 .idea-card {
