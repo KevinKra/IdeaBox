@@ -1,12 +1,7 @@
 *, *:before, *:after {
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
-}
-body {
-}
-
-main {
-	
+  outline: none;
 }
 
 .header-title h1 {
@@ -19,6 +14,29 @@ input, textarea, .idea-card {
   border: 2px solid #D2CCCD;
   border-radius: 5px;
   resize: none;
+}
+
+.focus {
+	transition: .5s ease-in-out;
+}
+
+.focus:focus {
+	border: 2px solid #555;
+}
+
+.btn {
+	cursor: pointer;
+	transition: .2s ease-in-out;
+}
+
+.btn:hover {
+	background-color: #555;
+}
+
+.btn:active {
+	transition: .01s ease;
+	color: #ddd;
+	background-color: #222;
 }
 
 /* === header content ===*/
@@ -50,8 +68,6 @@ input, textarea, .idea-card {
 	color: #D2CCCD;
 	font-size: 1.3em;
   padding: 5px 5px 5px 10px;
-
-
 }
 
 .top-nav-form {
@@ -68,7 +84,7 @@ input, textarea, .idea-card {
 
 .fa-search {
 	box-sizing: content-box;
-	color: white;
+	color: #fff;
 	cursor: pointer;
   padding: 5px 7.5px 5px 5px;
 }
@@ -106,8 +122,7 @@ input, textarea, .idea-card {
 .btn-save-idea {
 	background-color: #6E646B;
 	border: 0;
-  color: white;
-  cursor: pointer;
+  color: #fff;
 	font-size: 1.35em;
 	font-weight: 800;
 	margin: 1.5rem 0;
