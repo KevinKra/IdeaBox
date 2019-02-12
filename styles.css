@@ -51,6 +51,7 @@ input, textarea, .idea-card {
 	font-size: 1.3em;
   padding: 5px 5px 5px 10px;
 
+
 }
 
 .top-nav-form {
@@ -66,8 +67,10 @@ input, textarea, .idea-card {
 }
 
 .fa-search {
+	box-sizing: content-box;
 	color: white;
-  margin: 5px 7.5px 5px 5px;
+	cursor: pointer;
+  padding: 5px 7.5px 5px 5px;
 }
 
 /* === body content ===*/
