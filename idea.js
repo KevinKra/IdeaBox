@@ -5,7 +5,6 @@ class Idea {
     this.quality = 'swill';
   }
   saveToStorage() {
-    ideas.push(this);
     var stringifiedIdeas = JSON.stringify(ideas);
     localStorage.setItem("ideas", stringifiedIdeas);
     //console.log(JSON.stringify(arry));
