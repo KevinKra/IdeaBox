@@ -23,10 +23,8 @@ onLoad();
 
 
 function onLoad() {
-  var stringifiedIdeas = localStorage.getItem('ideas');
-  var parsedIdeas = JSON.parse(stringifiedIdeas);
-  for (var i = 0; i < parsedIdeas.length; i++) {
-    createIdeaCard(parsedIdeas[i]);
+  for (var i = 0; i < ideas.length; i++) {
+    createIdeaCard(ideas[i]);
   }
 }
 // onLoad function
