@@ -1,8 +1,9 @@
 class Idea {
-  constructor(title, body) {
+  constructor(title, body, id) {
     this.title = title;
     this.body = body;
     this.quality = 'swill';
+    this.id = id;
   }
   saveToStorage() {
     var stringifiedIdeas = JSON.stringify(ideas);

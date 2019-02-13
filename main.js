@@ -4,26 +4,29 @@ var savBtn = document.querySelector('.btn-save-idea');
 var cardContainer = document.querySelector('.output-content');
 
 var stringifiedIdeas = localStorage.getItem('ideas') || '[]';
-ideas = JSON.parse(stringifiedIdeas);
+var ideas = JSON.parse(stringifiedIdeas);
 var ideaCounter = 0;
 //ideaCounter = JSON.parse(ideaCounter);
 
 savBtn.addEventListener('click', saveIdea);
-cardContainer.addEventListener('click', buttonChecker);
-onLoad();
+cardContainer.addEventListener('click', handleCards);
+onLoad(ideas);
 
-function onLoad() {
-  for (var i = 0; i < ideas.length; i++) {
-    createIdeaCard(ideas[i]);
+function onLoad(ideasArry) {
+  ideas = [];
+  for (var i = 0; i < ideasArry.length; i++) {
+    var newCard = new Idea(titleInput.value, bodyInput.value);
+    ideas.push(newCard);
+    createIdeaCard(ideasArry[i]);
   }
+  console.log(ideas);
 }
 
 function saveIdea() {
   var title = titleInput.value;
   var body = bodyInput.value;
-  var idea = new Idea(title, body);
+  var idea = new Idea(title, body, ideaCounter);
   createIdeaCard(idea);
-  ideas.push(idea);
   idea.saveToStorage();
   clearInputValues(title, body); 
 }
@@ -37,6 +40,7 @@ function createIdeaCard(ideaObj) {
   var card = document.createElement('article');
   card.className += "idea-card";
   card.dataset.id = ideaObj.id;
+  ideas.push(ideaObj);
   incrementCounter();
   storeCounter();
   var html = `
@@ -55,6 +59,15 @@ function createIdeaCard(ideaObj) {
   cardContainer.appendChild(card);
 }
 
+
+function makeCardEditable(e) {
+  e.preventDefault();
+  if (e.target.className === 'idea-card-title' || e.target.className === 'idea-card-paragraph') {
+    e.target.contentEditable = true;
+  } 
+  var cardDataId = e.target.closest('.idea-card').getAttribute('data-id');
+}
+
 function incrementCounter() {
   ideaCounter++;
 }
@@ -64,8 +77,9 @@ function storeCounter() {
   localStorage.setItem('ideaCounter', stringifiedCounter);
 }
 
-function buttonChecker(e){
+function handleCards(e){
   e.preventDefault();
+  makeCardEditable(e);
   if (e.target.id === 'close-idea-card') {
       e.target.parentElement.parentElement.remove();
   } 
