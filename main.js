@@ -23,6 +23,7 @@ function saveIdea() {
   var body = bodyInput.value;
   var idea = new Idea(title, body);
   createIdeaCard(idea);
+  ideas.push(idea);
   idea.saveToStorage();
   clearInputValues(title, body); 
 }
