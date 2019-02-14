@@ -5,19 +5,12 @@ var cardContainer = document.querySelector('.output-content');
 
 let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
 
-appendCard(ideas);
-
 inputForm.addEventListener('submit', collectInputs);
 cardContainer.addEventListener('click', clickHandler);
 onLoad(ideas);
 
 function onLoad(oldIdeas) {
-  ideas = [];
-  for(let i = 0; i < oldIdeas.length; i++) {
-    var newIdea = new Idea(oldIdeas[i].title, oldIdeas[i].body);
-    ideas.push(newIdea);
-    appendCard(ideas, cardContainer);
-  }
+  ideas = appendAllCards(oldIdeas)
 }
 
 function clickHandler(e) {
@@ -31,20 +24,30 @@ function collectInputs(e) {
   e.preventDefault();
   const title = (this.querySelector(`[name="idea-title"]`)).value;
   const paragraph = (this.querySelector(`[name="idea-content`)).value; 
-  const inputObject = new Idea(title, paragraph)
-  ideas.push(inputObject);
+  const newIdea = new Idea(title, paragraph, Date.now)
+  ideas.push(newIdea);
   // localStorage.setItem("ideas", JSON.stringify(ideas));
-  inputObject.saveToStorage(ideas);
-  appendCard(ideas);
+  newIdea.saveToStorage(ideas);
+  appendCard(newIdea);
   this.reset();
 }
 
-function appendCard(cards) {
-  cardContainer.innerHTML = cards.map((card, i) => {
-    return `<article class="idea-card">
+function appendAllCards(ideas) {
+  let localIdeas = [];
+  ideas.forEach(function(idea) {
+    let newIdea = new Idea(idea.title, idea.body, idea.index);
+    localIdeas.push(newIdea);
+    appendCard(newIdea);
+  })
+  return localIdeas;
+}
+
+function appendCard(card) {
+  cardContainer.innerHTML += 
+     `<article class="idea-card" data-index=${card.index}>
   <h2 class="idea-card-title">${card.title}</h2>
   <p class="idea-card-paragraph">${card.body}</p>
-  <section class="idea-card-footer data-index=${i} id="item${i}">
+  <section class="idea-card-footer">
     <section class="card-footer-status">
       <image class="btn btn-2" id="increase-quality" src="images/upvote.svg" alt="upvote card button" />
       <image class="btn btn-2" id="decrease-quality" src="images/downvote.svg" alt="downvote card button" />
@@ -54,5 +57,23 @@ function appendCard(cards) {
     <img class="btn btn-2" id="close-idea-card" src="images/delete.svg" alt="delete card button"/>
   </section>
   </article>`
-  }).join('');
 }
+
+
+// function appendCard(cards) {
+//   cardContainer.innerHTML = cards.map((card, i) => {
+//     return `<article class="idea-card">
+//   <h2 class="idea-card-title">${card.title}</h2>
+//   <p class="idea-card-paragraph">${card.body}</p>
+//   <section class="idea-card-footer data-index=${i} id="item${i}">
+//     <section class="card-footer-status">
+//       <image class="btn btn-2" id="increase-quality" src="images/upvote.svg" alt="upvote card button" />
+//       <image class="btn btn-2" id="decrease-quality" src="images/downvote.svg" alt="downvote card button" />
+//       <p>Quality:</p>
+//       <p class="quality-current">&nbsp${card.quality}</p>
+//     </section>
+//     <img class="btn btn-2" id="close-idea-card" src="images/delete.svg" alt="delete card button"/>
+//   </section>
+//   </article>`
+//   }).join('');
+// }
