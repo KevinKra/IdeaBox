@@ -18,15 +18,21 @@ function onLoad(oldIdeas) {
 function clickHandler(e) {
   if (e.target.id === "close-idea-card") {
     e.target.closest(".idea-card").remove();
-    // ideas.splice()
+    let dataIndex = parseInt(e.target.closest(".idea-card").getAttribute("data-index"));
+  
+    let returnedIdeas = ideas.filter( (idea) =>  {
+      console.log(idea.index === dataIndex);
+       return idea.index !== dataIndex;
+    })
+    idea.deleteFromStorage(returnedIdeas)
   }
-}
+};
 
 function collectInputs(e) {
   e.preventDefault();
   const title = (this.querySelector(`[name="idea-title"]`)).value;
-  const paragraph = (this.querySelector(`[name="idea-content`)).value; 
-  const newIdea = new Idea(title, paragraph, Date.now())
+  const paragraph = (this.querySelector(`[name="idea-content`)).value;
+  const newIdea = new Idea(title, paragraph, Date.now();
   ideas.push(newIdea);
   // localStorage.setItem("ideas", JSON.stringify(ideas));
   newIdea.saveToStorage(ideas);
