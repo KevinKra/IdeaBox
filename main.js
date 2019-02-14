@@ -5,6 +5,8 @@ var cardContainer = document.querySelector('.output-content');
 
 let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
 
+
+
 inputForm.addEventListener('submit', collectInputs);
 cardContainer.addEventListener('click', clickHandler);
 onLoad(ideas);
@@ -29,9 +31,8 @@ function clickHandler(e) {
 function collectInputs(e) {
   e.preventDefault();
   const title = (this.querySelector(`[name="idea-title"]`)).value;
-  const paragraph = (this.querySelector(`[name="idea-content`)).value; 
-  const newIdea = new Idea(title, paragraph, Date.now());
-  console.log(Date.now());
+  const paragraph = (this.querySelector(`[name="idea-content`)).value;
+  const newIdea = new Idea(title, paragraph, Date.now();
   ideas.push(newIdea);
   // localStorage.setItem("ideas", JSON.stringify(ideas));
   newIdea.saveToStorage(ideas);
