@@ -16,6 +16,10 @@ class Idea {
     
   }
   updateContent() {
+    var index = ideas.indexOf(this); //this refers to ideaWeWant
+    ideas.splice(index, 1, this)
+    console.log(ideas);
+
 
   }
   updateQuality() {
