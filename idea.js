@@ -4,21 +4,21 @@ class Idea {
     this.body = body;
     this.quality = 'swill';
   }
-  static saveToStorage(ideas) {
+  saveToStorage(ideas) {
     var stringifiedIdeas = JSON.stringify(ideas);
     localStorage.setItem("ideas", stringifiedIdeas);
     //console.log(JSON.stringify(arry));
     // JSON.stringify the idea object and assign to variable
     // Set the stringified idea object in local storage using the idea object's id as the key
   }
-  static deleteFromStorage(id) {
+  deleteFromStorage(id) {
     arry.push(this);
     // localStorage.removeItem(id)
   }
-  static updateContent() {
+  updateContent() {
 
   }
-  static updateQuality() {
+  updateQuality() {
     // If the Up vote is pressed
       // If this.quality is equal to 'swill'
       // Then assign 'plausible' to this.quality

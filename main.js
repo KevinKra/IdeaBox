@@ -1,25 +1,24 @@
 var titleInput = document.querySelector('#title-input');
 var bodyInput = document.querySelector('#body-textarea');
 const inputForm = document.querySelector('.input-form');
-
+var cardContainer = document.querySelector('.output-content');
 
 let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
 
 appendCard(ideas);
-// console.log(ideas);
-inputForm.addEventListener('submit', collectInputs);
-// cardContainer.addEventListener('click', buttonChecker);
-// onLoad(ideas);
 
-// function onLoad(oldIdeas) {
-//   ideas = [];
-//   for(var i = 0; i < oldIdeas.length; i++) {
-//     var newIdea = new Idea(oldIdeas[i].title, oldIdeas[i].body);
-//     ideas.push(newIdea);
-//     appendCard(ideas, cardContainer);
-//   }
-//   console.log(ideas);
-// }
+inputForm.addEventListener('submit', collectInputs);
+cardContainer.addEventListener('click', clickHandler);
+onLoad(ideas);
+
+function onLoad(oldIdeas) {
+  ideas = [];
+  for(var i = 0; i < oldIdeas.length; i++) {
+    var newIdea = new Idea(oldIdeas[i].title, oldIdeas[i].body);
+    ideas.push(newIdea);
+    appendCard(ideas, cardContainer);
+  }
+}
 
 function collectInputs(e) {
   e.preventDefault();
@@ -28,13 +27,12 @@ function collectInputs(e) {
   const inputObject = new Idea(title, paragraph)
   ideas.push(inputObject);
   // localStorage.setItem("ideas", JSON.stringify(ideas));
-  Idea.saveToStorage(ideas);
-  appendCard(ideas)
+  inputObject.saveToStorage(ideas);
+  appendCard(ideas);
   this.reset();
 }
 
 function appendCard(cards) {
-  var cardContainer = document.querySelector('.output-content');
   cardContainer.innerHTML = cards.map((card, i) => {
     return `<article class="idea-card">
   <h2 class="idea-card-title">${card.title}</h2>
@@ -52,5 +50,12 @@ function appendCard(cards) {
   }).join('');
 }
 
-
+// function toggleDone(e) {
+//   if (!e.target.matches("input")) return;
+//   const el = e.target;
+//   const index = el.dataset.index;
+//   items[index].done = !items[index].done;
+//   localStorage.setItem("items", JSON.stringify(items));
+//   appendList(items, itemsList);
+// }
 
