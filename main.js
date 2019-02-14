@@ -1,79 +1,56 @@
 var titleInput = document.querySelector('#title-input');
 var bodyInput = document.querySelector('#body-textarea');
-var savBtn = document.querySelector('.btn-save-idea');
-var cardContainer = document.querySelector('.output-content');
+const inputForm = document.querySelector('.input-form');
 
-var stringifiedIdeas = localStorage.getItem('ideas') || '[]';
-ideas = JSON.parse(stringifiedIdeas);
-var ideaCounter = 0;
-//ideaCounter = JSON.parse(ideaCounter);
 
-savBtn.addEventListener('click', saveIdea);
-cardContainer.addEventListener('click', buttonChecker);
-onLoad();
+let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
 
-function onLoad() {
-  for (var i = 0; i < ideas.length; i++) {
-    createIdeaCard(ideas[i]);
-  }
+appendCard(ideas);
+// console.log(ideas);
+inputForm.addEventListener('submit', collectInputs);
+// cardContainer.addEventListener('click', buttonChecker);
+// onLoad(ideas);
+
+// function onLoad(oldIdeas) {
+//   ideas = [];
+//   for(var i = 0; i < oldIdeas.length; i++) {
+//     var newIdea = new Idea(oldIdeas[i].title, oldIdeas[i].body);
+//     ideas.push(newIdea);
+//     appendCard(ideas, cardContainer);
+//   }
+//   console.log(ideas);
+// }
+
+function collectInputs(e) {
+  e.preventDefault();
+  const title = (this.querySelector(`[name="idea-title"]`)).value;
+  const paragraph = (this.querySelector(`[name="idea-content`)).value; 
+  const inputObject = new Idea(title, paragraph)
+  ideas.push(inputObject);
+  // localStorage.setItem("ideas", JSON.stringify(ideas));
+  Idea.saveToStorage(ideas);
+  appendCard(ideas)
+  this.reset();
 }
 
-function saveIdea() {
-  var title = titleInput.value;
-  var body = bodyInput.value;
-  var idea = new Idea(title, body);
-  createIdeaCard(idea);
-  ideas.push(idea);
-  idea.saveToStorage();
-  clearInputValues(title, body); 
-}
-
-function clearInputValues(title, body) {
-  title.value = "";
-  body.value = "";
-}
-
-function createIdeaCard(ideaObj) {
-  var card = document.createElement('article');
-  card.className += "idea-card";
-  card.dataset.id = ideaObj.id;
-  incrementCounter();
-  storeCounter();
-  var html = `
-  <h2 class="idea-card-title">${ideaObj.title}</h2>
-  <p class="idea-card-paragraph">${ideaObj.body}</p>
-  <section class="idea-card-footer">
+function appendCard(cards) {
+  var cardContainer = document.querySelector('.output-content');
+  cardContainer.innerHTML = cards.map((card, i) => {
+    return `<article class="idea-card">
+  <h2 class="idea-card-title">${card.title}</h2>
+  <p class="idea-card-paragraph">${card.body}</p>
+  <section class="idea-card-footer data-index=${i} id="item${i}">
     <section class="card-footer-status">
       <image class="btn btn-2" id="increase-quality" src="images/upvote.svg" alt="upvote card button" />
       <image class="btn btn-2" id="decrease-quality" src="images/downvote.svg" alt="downvote card button" />
       <p>Quality:</p>
-      <p class="quality-current">&nbsp${ideaObj.quality}</p>
+      <p class="quality-current">&nbsp${card.quality}</p>
     </section>
     <img class="btn btn-2" id="close-idea-card" src="images/delete.svg" alt="delete card button"/>
-  </section>`
-  card.innerHTML = html;
-  cardContainer.appendChild(card);
+  </section>
+  </article>`
+  }).join('');
 }
 
-function incrementCounter() {
-  ideaCounter++;
-}
 
-function storeCounter() {
-  var stringifiedCounter = JSON.stringify(ideaCounter);
-  localStorage.setItem('ideaCounter', stringifiedCounter);
-}
 
-function buttonChecker(e){
-  e.preventDefault();
-  if (e.target.id === 'close-idea-card') {
-      e.target.parentElement.parentElement.remove();
-  } 
-  if (e.target.id === 'increase-quality') {
-      console.log(e.target.parentElement.parentElement.parentElement.dataset.id);
-      // updateQuality();
-  }
-  if (e.target.id === 'decrease-quality') {
-      // updateQuality();
-  }
-}
