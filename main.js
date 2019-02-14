@@ -1,5 +1,4 @@
-var titleInput = document.querySelector('#title-input');
-var bodyInput = document.querySelector('#body-textarea');
+
 const inputForm = document.querySelector('.input-form');
 var cardContainer = document.querySelector('.output-content');
 
@@ -7,8 +6,10 @@ let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
 
 
 
+
 inputForm.addEventListener('submit', collectInputs);
 cardContainer.addEventListener('click', clickHandler);
+cardContainer.addEventListener('keyup', saveEditedCard);
 onLoad(ideas);
 
 function onLoad(oldIdeas) {
@@ -30,9 +31,9 @@ function clickHandler(e) {
 
 function collectInputs(e) {
   e.preventDefault();
-  const title = (this.querySelector(`[name="idea-title"]`)).value;
-  const paragraph = (this.querySelector(`[name="idea-content`)).value;
-  const newIdea = new Idea(title, paragraph, Date.now());
+  var title = document.querySelector('#title-input').value;
+  var body = document.querySelector('#body-textarea').value;
+  const newIdea = new Idea(title, body, Date.now());
   ideas.push(newIdea);
   // localStorage.setItem("ideas", JSON.stringify(ideas));
   newIdea.saveToStorage(ideas);
@@ -53,8 +54,8 @@ function appendAllCards(ideas) {
 function appendCard(card) {
   cardContainer.innerHTML += 
      `<article class="idea-card" data-index=${card.index}>
-  <h2 class="idea-card-title">${card.title}</h2>
-  <p class="idea-card-paragraph">${card.body}</p>
+  <h2 class="idea-card-title" contentEditable="true">${card.title}</h2>
+  <p class="idea-card-paragraph" contentEditable="true">${card.body}</p>
   <section class="idea-card-footer">
     <section class="card-footer-status">
       <image class="btn btn-2" id="increase-quality" src="images/upvote.svg" alt="upvote card button" />
@@ -65,10 +66,23 @@ function appendCard(card) {
     <img class="btn btn-2" id="close-idea-card" src="images/delete.svg" alt="delete card button"/>
   </section>
   </article>`
-  var cardTitle = document.querySelector(".idea-card-title");
-  cardTitle.contentEditable = "true";
-  var cardParagraph = document.querySelector(".idea-card-paragraph");
-  cardParagraph.contentEditable = "true";
+}
+
+function saveEditedCard(e) {
+  var dataIndex = Number(e.target.closest(".idea-card").getAttribute("data-index"));
+  var ideaWeWant = ideas.find(function(idea) {
+  return idea.index === dataIndex;
+  });
+  var newValue = e.target.innerHTML;
+  
+  if(e.target.className === "idea-card-title") {
+      ideaWeWant.title = newValue;
+  } if (e.target.className === "idea-card-paragraph") {
+      ideaWeWant.body = newValue;
+  }
+  console.log(ideaWeWant);
+  ideaWeWant.updateContent();
+  ideaWeWant.saveToStorage(ideas);
 }
 
 
