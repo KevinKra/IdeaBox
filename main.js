@@ -13,10 +13,17 @@ onLoad(ideas);
 
 function onLoad(oldIdeas) {
   ideas = [];
-  for(var i = 0; i < oldIdeas.length; i++) {
+  for(let i = 0; i < oldIdeas.length; i++) {
     var newIdea = new Idea(oldIdeas[i].title, oldIdeas[i].body);
     ideas.push(newIdea);
     appendCard(ideas, cardContainer);
+  }
+}
+
+function clickHandler(e) {
+  if (e.target.id === "close-idea-card") {
+    e.target.closest(".idea-card").remove();
+    // ideas.splice()
   }
 }
 
@@ -49,13 +56,3 @@ function appendCard(cards) {
   </article>`
   }).join('');
 }
-
-// function toggleDone(e) {
-//   if (!e.target.matches("input")) return;
-//   const el = e.target;
-//   const index = el.dataset.index;
-//   items[index].done = !items[index].done;
-//   localStorage.setItem("items", JSON.stringify(items));
-//   appendList(items, itemsList);
-// }
-
