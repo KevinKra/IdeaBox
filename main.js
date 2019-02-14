@@ -32,7 +32,7 @@ function collectInputs(e) {
   e.preventDefault();
   const title = (this.querySelector(`[name="idea-title"]`)).value;
   const paragraph = (this.querySelector(`[name="idea-content`)).value;
-  const newIdea = new Idea(title, paragraph, Date.now();
+  const newIdea = new Idea(title, paragraph, Date.now());
   ideas.push(newIdea);
   // localStorage.setItem("ideas", JSON.stringify(ideas));
   newIdea.saveToStorage(ideas);
@@ -65,7 +65,12 @@ function appendCard(card) {
     <img class="btn btn-2" id="close-idea-card" src="images/delete.svg" alt="delete card button"/>
   </section>
   </article>`
+  var cardTitle = document.querySelector(".idea-card-title");
+  cardTitle.contentEditable = "true";
+  var cardParagraph = document.querySelector(".idea-card-paragraph");
+  cardParagraph.contentEditable = "true";
 }
+
 
 
 // function appendCard(cards) {
