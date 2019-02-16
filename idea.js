@@ -1,9 +1,9 @@
 class Idea {
-  constructor(title, body, index) {
+  constructor(title, body, index, quality) {
     this.title = title;
     this.body = body;
-    this.quality = 'swill';
     this.index = index;
+    this.quality = quality || 'swill';
   }
   saveToStorage(ideas) {
     var stringifiedIdeas = JSON.stringify(ideas);
@@ -23,21 +23,8 @@ class Idea {
     ideas.splice(index, 1, this)
   
   }
-  updateQuality() {
-
-    returnedIdea.quality = "plausible";
-    // If the Up vote is pressed
-      // If this.quality is equal to 'swill'
-      // Then assign 'plausible' to this.quality
-
-      // If this.quality is equal to 'plausible'
-      // Then assign 'genius' to this.quality
-    
-    // If the Down vote is pressed
-      // If this.quality is equal to 'genius'
-      // Then assign 'plausible' to this.quality
-
-      // If this.quality is equal to 'plausible'
-      // Then assign 'swill' to this.quality
+  updateQuality(quality) {
+    this.quality = quality;
+    this.saveToStorage(ideas);
   }
 }

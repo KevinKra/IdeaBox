@@ -15,7 +15,7 @@ onLoad(ideas);
 function onLoad(oldIdeas) {
   ideas = [];
   oldIdeas.forEach(function(idea) {
-    let newIdea = new Idea(idea.title, idea.body, idea.index);
+    let newIdea = new Idea(idea.title, idea.body, idea.index, idea.quality);
     ideas.push(newIdea);
     appendCard(newIdea);
   });
@@ -44,10 +44,10 @@ function upVote(e) {
   var qualityText = e.target.nextElementSibling.nextElementSibling.nextElementSibling;
   if (returnedIdea.quality === "swill") {
     qualityText.innerHTML = "&nbspplausible";
-    returnedIdea.quality = "plausible";
+    returnedIdea.updateQuality("plausible");
   } else if(returnedIdea.quality === "plausible") {
     qualityText.innerHTML = "&nbspgenius";
-    returnedIdea.quality = "genius";
+    returnedIdea.updateQuality("genius");
   }
 }
 
@@ -56,10 +56,10 @@ function downVote(e) {
   var qualityText = e.target.nextElementSibling.nextElementSibling;
   if (returnedIdea.quality === "genius") {
     qualityText.innerHTML = "&nbspplausible";
-    returnedIdea.quality = "plausible";
+    returnedIdea.updateQuality("plausible");
   } else if(returnedIdea.quality === "plausible") {
     qualityText.innerHTML = "&nbspswill";
-    returnedIdea.quality = "swill";
+    returnedIdea.updateQuality("swill");
   }
 }
 
