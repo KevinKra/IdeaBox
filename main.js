@@ -1,12 +1,12 @@
 
 const inputForm = document.querySelector('.input-form');
 var cardContainer = document.querySelector('.output-content');
-
+var searchBar = document.querySelector(".search-bar");
+var searchButton = document.querySelector(".fa-lg");
 let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
 
 
-
-
+searchButton.addEventListener("click", filterCards);
 inputForm.addEventListener('submit', collectInputs);
 cardContainer.addEventListener('click', clickHandler);
 cardContainer.addEventListener('keyup', saveEditedCard);
@@ -52,8 +52,7 @@ function appendAllCards(ideas) {
 }
 
 function appendCard(card) {
-  cardContainer.innerHTML += 
-     `<article class="idea-card" data-index=${card.index}>
+    var displayCard = `<article class="idea-card" data-index=${card.index}>
   <h2 class="idea-card-title" contentEditable="true">${card.title}</h2>
   <p class="idea-card-paragraph" contentEditable="true">${card.body}</p>
   <section class="idea-card-footer">
@@ -65,7 +64,9 @@ function appendCard(card) {
     </section>
     <img class="btn btn-2" id="close-idea-card" src="images/delete.svg" alt="delete card button"/>
   </section>
-  </article>`
+  </article>`;
+  cardContainer.insertAdjacentHTML('afterbegin', displayCard);
+
 }
 
 function saveEditedCard(e) {
@@ -84,6 +85,17 @@ function saveEditedCard(e) {
   ideaWeWant.updateContent();
   ideaWeWant.saveToStorage(ideas);
 }
+
+function filterCards(e){
+  console.log(e.previousSibling.value);
+  var searchBarText = e.target.value;
+  var ideaTitle = document.querySelector(".idea-card-title");
+  if (searchBarText === ideaTitle.innerHTML) {
+    console.log('yar');
+  }
+}
+
+
 
 
 
