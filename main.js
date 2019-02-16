@@ -25,16 +25,51 @@ function clickHandler(e) {
   if (e.target.id === "close-idea-card") {
     deleteIdea(e);
   }
+  if (e.target.id === "increase-quality") {
+    upVote(e);
+  }
+  if (e.target.id === "decrease-quality") {
+    downVote(e);
+  }
 };
 
 function deleteIdea(e) {
   e.target.closest(".idea-card").remove();
-  let dataIndex = parseInt(e.target.closest(".idea-card").getAttribute("data-index"));
+  var returnedIdea = findIdea(e);
+  returnedIdea.deleteFromStorage();
+}
+
+function upVote(e) {
+  var returnedIdea = findIdea(e);
+  var qualityText = e.target.nextElementSibling.nextElementSibling.nextElementSibling;
+  if (returnedIdea.quality === "swill") {
+    qualityText.innerHTML = "&nbspplausible";
+    returnedIdea.quality = "plausible";
+  } else if(returnedIdea.quality === "plausible") {
+    qualityText.innerHTML = "&nbspgenius";
+    returnedIdea.quality = "genius";
+  }
+}
+
+function downVote(e) {
+  var returnedIdea = findIdea(e);
+  var qualityText = e.target.nextElementSibling.nextElementSibling;
+  if (returnedIdea.quality === "genius") {
+    qualityText.innerHTML = "&nbspplausible";
+    returnedIdea.quality = "plausible";
+  } else if(returnedIdea.quality === "plausible") {
+    qualityText.innerHTML = "&nbspswill";
+    returnedIdea.quality = "swill";
+  }
+}
+
+
+function findIdea(e) {
+ let dataIndex = parseInt(e.target.closest(".idea-card").getAttribute("data-index"));
   
-  let returnedIdea = ideas.find( (idea) =>  {
+  return ideas.find( (idea) =>  {
      return idea.index === dataIndex;
   });
-  returnedIdea.deleteFromStorage();
 }
 
 function collectInputs(e) {

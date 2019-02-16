@@ -14,8 +14,6 @@ class Idea {
   }
   deleteFromStorage() {
    var i = ideas.indexOf(this); 
-   console.log(i); 
-   console.log(ideas);
    ideas.splice(i, 1);
    var stringifiedIdeas = JSON.stringify(ideas);
    localStorage.setItem("ideas", stringifiedIdeas);
@@ -23,11 +21,11 @@ class Idea {
   updateContent() {
     var index = ideas.indexOf(this); //this refers to ideaWeWant
     ideas.splice(index, 1, this)
-    console.log(ideas);
-
-
+  
   }
   updateQuality() {
+
+    returnedIdea.quality = "plausible";
     // If the Up vote is pressed
       // If this.quality is equal to 'swill'
       // Then assign 'plausible' to this.quality
