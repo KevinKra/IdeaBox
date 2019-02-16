@@ -13,21 +13,29 @@ cardContainer.addEventListener('keyup', saveEditedCard);
 onLoad(ideas);
 
 function onLoad(oldIdeas) {
-  ideas = appendAllCards(oldIdeas)
+  ideas = [];
+  oldIdeas.forEach(function(idea) {
+    let newIdea = new Idea(idea.title, idea.body, idea.index);
+    ideas.push(newIdea);
+    appendCard(newIdea);
+  });
 }
 
 function clickHandler(e) {
   if (e.target.id === "close-idea-card") {
-    e.target.closest(".idea-card").remove();
-    let dataIndex = parseInt(e.target.closest(".idea-card").getAttribute("data-index"));
-  
-    let returnedIdeas = ideas.filter( (idea) =>  {
-      console.log(idea.index === dataIndex);
-       return idea.index !== dataIndex;
-    })
-    idea.deleteFromStorage(returnedIdeas)
+    deleteIdea(e);
   }
 };
+
+function deleteIdea(e) {
+  e.target.closest(".idea-card").remove();
+  let dataIndex = parseInt(e.target.closest(".idea-card").getAttribute("data-index"));
+  
+  let returnedIdea = ideas.find( (idea) =>  {
+     return idea.index === dataIndex;
+  });
+  returnedIdea.deleteFromStorage();
+}
 
 function collectInputs(e) {
   e.preventDefault();
@@ -39,16 +47,6 @@ function collectInputs(e) {
   newIdea.saveToStorage(ideas);
   appendCard(newIdea);
   this.reset();
-}
-
-function appendAllCards(ideas) {
-  let localIdeas = [];
-  ideas.forEach(function(idea) {
-    let newIdea = new Idea(idea.title, idea.body, idea.index);
-    localIdeas.push(newIdea);
-    appendCard(newIdea);
-  })
-  return localIdeas;
 }
 
 function appendCard(card) {
@@ -81,17 +79,17 @@ function saveEditedCard(e) {
   } if (e.target.className === "idea-card-paragraph") {
       ideaWeWant.body = newValue;
   }
-  console.log(ideaWeWant);
+  
   ideaWeWant.updateContent();
   ideaWeWant.saveToStorage(ideas);
 }
 
 function filterCards(e){
-  console.log(e.previousSibling.value);
+  // console.log(e.previousSibling.value);
   var searchBarText = e.target.value;
   var ideaTitle = document.querySelector(".idea-card-title");
   if (searchBarText === ideaTitle.innerHTML) {
-    console.log('yar');
+    // console.log('yar');
   }
 }
 

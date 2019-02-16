@@ -13,7 +13,12 @@ class Idea {
     // Set the stringified idea object in local storage using the idea object's id as the key
   }
   deleteFromStorage() {
-    
+   var i = ideas.indexOf(this); 
+   console.log(i); 
+   console.log(ideas);
+   ideas.splice(i, 1);
+   var stringifiedIdeas = JSON.stringify(ideas);
+   localStorage.setItem("ideas", stringifiedIdeas);
   }
   updateContent() {
     var index = ideas.indexOf(this); //this refers to ideaWeWant
