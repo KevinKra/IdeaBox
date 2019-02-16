@@ -2,11 +2,11 @@
 const inputForm = document.querySelector('.input-form');
 var cardContainer = document.querySelector('.output-content');
 var searchBar = document.querySelector(".search-bar");
-var searchButton = document.querySelector(".fa-lg");
+// var searchButton = document.querySelector(".fa-lg");
 let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
 
 
-searchButton.addEventListener("click", filterCards);
+searchBar.addEventListener("keyup", searchCards);
 inputForm.addEventListener('submit', collectInputs);
 cardContainer.addEventListener('click', clickHandler);
 cardContainer.addEventListener('keyup', saveEditedCard);
@@ -119,14 +119,21 @@ function saveEditedCard(e) {
   ideaWeWant.saveToStorage(ideas);
 }
 
-function filterCards(e){
-  // console.log(e.previousSibling.value);
+function searchCards(e){
   var searchBarText = e.target.value;
-  var ideaTitle = document.querySelector(".idea-card-title");
-  if (searchBarText === ideaTitle.innerHTML) {
-    // console.log('yar');
+  var matchingIdeas = [];
+  while (cardContainer.hasChildNodes()) {
+    cardContainer.removeChild(cardContainer.lastChild);
   }
-}
+  for (var i = 0; i < ideas.length; i++) {
+    if(ideas[i].title === searchBarText) {
+      matchingIdeas.push(ideas[i]);
+      appendCard(ideas[i]);
+    }
+  }
+  }
+
+
 
 
 
