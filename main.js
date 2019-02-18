@@ -128,9 +128,7 @@ function editExistingCard(e) {
 function searchCards(e){
   var searchBarText = e.target.value;
   var matchingIdeas = [];
-  while (cardsContainer.hasChildNodes()) {
-    cardsContainer.removeChild(cardsContainer.lastChild);
-  }
+  clearCards();
   for (var i = 0; i < ideas.length; i++) {
     if(ideas[i].title === searchBarText) {
       matchingIdeas.push(ideas[i]);
@@ -138,3 +136,9 @@ function searchCards(e){
     }
   }
 };
+
+function clearCards() {
+  while (cardsContainer.hasChildNodes()) {
+    cardsContainer.removeChild(cardsContainer.lastChild);
+  }
+}
