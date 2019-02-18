@@ -3,14 +3,13 @@ const inputForm = document.querySelector('.input-form');
 var cardsContainer = document.querySelector('.output-content');
 const card = document.querySelector('.idea-card')
 var searchBar = document.querySelector(".search-bar");
-// var searchButton = document.querySelector(".fa-lg");
 let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
 
 
 searchBar.addEventListener("keyup", searchCards);
 inputForm.addEventListener('submit', collectInputs);
 cardsContainer.addEventListener('click', clickHandler);
-cardsContainer.addEventListener('keyup', saveEditedCard);
+cardsContainer.addEventListener('keyup', editExistingCard);
 restoreObject(ideas);
 
 function restoreObject(parsedIdeas) {
@@ -20,7 +19,7 @@ function restoreObject(parsedIdeas) {
     ideas.push(restoredIdea);
     appendCard(restoredIdea);
   });
-}
+};
 
 function clickHandler(e) {
   if (e.target.id === "close-idea-card") {
@@ -38,7 +37,7 @@ function deleteIdea(e) {
   e.target.closest(".idea-card").remove();
   var ideaToRemove = findIdea(e);
   ideaToRemove.deleteFromStorage();
-}
+};
 
 function upVote(e) {
   var ideaToUpvote = findIdea(e);
@@ -50,7 +49,7 @@ function upVote(e) {
     qualityText.innerHTML = "&nbspgenius";
     ideaToUpvote.updateQuality("genius");
   }
-}
+};
 
 /* POTENTIAL SOLUTION TO "nextElementSibling" CHAIN ISSUE */
 // function upVote(e) {
@@ -77,14 +76,14 @@ function downVote(e) {
     qualityText.innerHTML = "&nbspswill";
     ideaToDownvote.updateQuality("swill");
   }
-}
+};
 
 function findIdea(e) {
  let dataIndex = parseInt(e.target.closest(".idea-card").getAttribute("data-index"));
   return ideas.find( (idea) =>  {
      return idea.index === dataIndex;
   });
-}
+};
 
 function collectInputs(e) {
   e.preventDefault();
@@ -95,7 +94,7 @@ function collectInputs(e) {
   newIdea.saveToStorage(ideas);
   appendCard(newIdea);
   this.reset();
-}
+};
 
 function appendCard(card) {
     var displayCard = `<article class="idea-card" data-index=${card.index}>
@@ -112,9 +111,9 @@ function appendCard(card) {
   </section>
   </article>`;
   cardsContainer.insertAdjacentHTML('afterbegin', displayCard);
-}
+};
 
-function saveEditedCard(e) {
+function editExistingCard(e) {
   var targetIdea = findIdea(e);
   var newValue = e.target.innerHTML;
   if(e.target.className === "idea-card-title") {
@@ -124,7 +123,7 @@ function saveEditedCard(e) {
   }
   targetIdea.updateContent();
   targetIdea.saveToStorage(ideas);
-}
+};
 
 function searchCards(e){
   var searchBarText = e.target.value;
@@ -138,4 +137,4 @@ function searchCards(e){
       appendCard(ideas[i]);
     }
   }
-}
+};
