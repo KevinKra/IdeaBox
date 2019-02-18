@@ -167,15 +167,15 @@ input, textarea, .idea-card {
 }
 
 .idea-card-title, .idea-card-paragraph {
-	padding: 0 1rem;
-}
-
-.idea-card-title {
+	padding: .5rem 1rem;
+  margin: 1rem .5rem;
 	color: #6E646B;
+	transition: all .07s ease-in-out;
 }
 
-.idea-card-paragraph {
-	color: #7C7879;
+.idea-card-paragraph:focus, .idea-card-title:focus {
+	outline: 2px solid #524649;
+	box-shadow: 0 0 10px grey;
 }
 
 .btn-2 {

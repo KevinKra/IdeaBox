@@ -19,9 +19,8 @@ class Idea {
    localStorage.setItem("ideas", stringifiedIdeas);
   }
   updateContent() {
-    var index = ideas.indexOf(this); //this refers to ideaWeWant
-    ideas.splice(index, 1, this)
-  
+    var index = ideas.indexOf(this); //this refers to targetIdea ~or associated context object
+    ideas.splice(index, 1, this);
   }
   updateQuality(quality) {
     this.quality = quality;
