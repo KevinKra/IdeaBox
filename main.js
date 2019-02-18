@@ -1,6 +1,7 @@
 
 const inputForm = document.querySelector('.input-form');
-var cardContainer = document.querySelector('.output-content');
+var cardsContainer = document.querySelector('.output-content');
+const card = document.querySelector('.idea-card')
 var searchBar = document.querySelector(".search-bar");
 // var searchButton = document.querySelector(".fa-lg");
 let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
@@ -8,16 +9,16 @@ let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
 
 searchBar.addEventListener("keyup", searchCards);
 inputForm.addEventListener('submit', collectInputs);
-cardContainer.addEventListener('click', clickHandler);
-cardContainer.addEventListener('keyup', saveEditedCard);
-onLoad(ideas);
+cardsContainer.addEventListener('click', clickHandler);
+cardsContainer.addEventListener('keyup', saveEditedCard);
+restoreObject(ideas);
 
-function onLoad(oldIdeas) {
+function restoreObject(parsedIdeas) {
   ideas = [];
-  oldIdeas.forEach(function(idea) {
-    let newIdea = new Idea(idea.title, idea.body, idea.index, idea.quality);
-    ideas.push(newIdea);
-    appendCard(newIdea);
+  parsedIdeas.forEach(function(idea) {
+    let restoredIdea = new Idea(idea.title, idea.body, idea.index, idea.quality);
+    ideas.push(restoredIdea);
+    appendCard(restoredIdea);
   });
 }
 
@@ -35,38 +36,51 @@ function clickHandler(e) {
 
 function deleteIdea(e) {
   e.target.closest(".idea-card").remove();
-  var returnedIdea = findIdea(e);
-  returnedIdea.deleteFromStorage();
+  var ideaToRemove = findIdea(e);
+  ideaToRemove.deleteFromStorage();
 }
 
 function upVote(e) {
-  var returnedIdea = findIdea(e);
+  var ideaToUpvote = findIdea(e);
   var qualityText = e.target.nextElementSibling.nextElementSibling.nextElementSibling;
-  if (returnedIdea.quality === "swill") {
+  if (ideaToUpvote.quality === "swill") {
     qualityText.innerHTML = "&nbspplausible";
-    returnedIdea.updateQuality("plausible");
-  } else if(returnedIdea.quality === "plausible") {
+    ideaToUpvote.updateQuality("plausible");
+  } else if(ideaToUpvote.quality === "plausible") {
     qualityText.innerHTML = "&nbspgenius";
-    returnedIdea.updateQuality("genius");
+    ideaToUpvote.updateQuality("genius");
   }
 }
+
+/* POTENTIAL SOLUTION TO "nextElementSibling" CHAIN ISSUE */
+// function upVote(e) {
+//   var ideaToUpvote = findIdea(e);
+//   if (!e.target.id === "increase-quality") return;
+//   //var qualityText = cardsContainer.querySelector('.current-quality');
+//   console.log(qualityText);
+//   if (ideaToUpvote.quality === "swill") {
+//     qualityText.innerHTML = "&nbspplausible";
+//     ideaToUpvote.updateQuality("plausible");
+//   } else if(ideaToUpvote.quality === "plausible") {
+//     qualityText.innerHTML = "&nbspgenius";
+//     ideaToUpvote.updateQuality("genius");
+//   }
+// }
 
 function downVote(e) {
-  var returnedIdea = findIdea(e);
+  var ideaToDownvote = findIdea(e);
   var qualityText = e.target.nextElementSibling.nextElementSibling;
-  if (returnedIdea.quality === "genius") {
+  if (ideaToDownvote.quality === "genius") {
     qualityText.innerHTML = "&nbspplausible";
-    returnedIdea.updateQuality("plausible");
-  } else if(returnedIdea.quality === "plausible") {
+    ideaToDownvote.updateQuality("plausible");
+  } else if(ideaToDownvote.quality === "plausible") {
     qualityText.innerHTML = "&nbspswill";
-    returnedIdea.updateQuality("swill");
+    ideaToDownvote.updateQuality("swill");
   }
 }
-
 
 function findIdea(e) {
  let dataIndex = parseInt(e.target.closest(".idea-card").getAttribute("data-index"));
-  
   return ideas.find( (idea) =>  {
      return idea.index === dataIndex;
   });
@@ -78,7 +92,6 @@ function collectInputs(e) {
   var body = document.querySelector('#body-textarea').value;
   const newIdea = new Idea(title, body, Date.now());
   ideas.push(newIdea);
-  // localStorage.setItem("ideas", JSON.stringify(ideas));
   newIdea.saveToStorage(ideas);
   appendCard(newIdea);
   this.reset();
@@ -93,37 +106,31 @@ function appendCard(card) {
       <image class="btn btn-2" id="increase-quality" src="images/upvote.svg" alt="upvote card button" />
       <image class="btn btn-2" id="decrease-quality" src="images/downvote.svg" alt="downvote card button" />
       <p>Quality:</p>
-      <p class="quality-current">&nbsp${card.quality}</p>
+      <p class="current-quality">&nbsp${card.quality}</p>
     </section>
     <img class="btn btn-2" id="close-idea-card" src="images/delete.svg" alt="delete card button"/>
   </section>
   </article>`;
-  cardContainer.insertAdjacentHTML('afterbegin', displayCard);
-
+  cardsContainer.insertAdjacentHTML('afterbegin', displayCard);
 }
 
 function saveEditedCard(e) {
-  var dataIndex = Number(e.target.closest(".idea-card").getAttribute("data-index"));
-  var ideaWeWant = ideas.find(function(idea) {
-  return idea.index === dataIndex;
-  });
+  var targetIdea = findIdea(e);
   var newValue = e.target.innerHTML;
-  
   if(e.target.className === "idea-card-title") {
-      ideaWeWant.title = newValue;
+      targetIdea.title = newValue;
   } if (e.target.className === "idea-card-paragraph") {
-      ideaWeWant.body = newValue;
+      targetIdea.body = newValue;
   }
-  
-  ideaWeWant.updateContent();
-  ideaWeWant.saveToStorage(ideas);
+  targetIdea.updateContent();
+  targetIdea.saveToStorage(ideas);
 }
 
 function searchCards(e){
   var searchBarText = e.target.value;
   var matchingIdeas = [];
-  while (cardContainer.hasChildNodes()) {
-    cardContainer.removeChild(cardContainer.lastChild);
+  while (cardsContainer.hasChildNodes()) {
+    cardsContainer.removeChild(cardsContainer.lastChild);
   }
   for (var i = 0; i < ideas.length; i++) {
     if(ideas[i].title === searchBarText) {
@@ -131,28 +138,4 @@ function searchCards(e){
       appendCard(ideas[i]);
     }
   }
-  }
-
-
-
-
-
-
-
-// function appendCard(cards) {
-//   cardContainer.innerHTML = cards.map((card, i) => {
-//     return `<article class="idea-card">
-//   <h2 class="idea-card-title">${card.title}</h2>
-//   <p class="idea-card-paragraph">${card.body}</p>
-//   <section class="idea-card-footer data-index=${i} id="item${i}">
-//     <section class="card-footer-status">
-//       <image class="btn btn-2" id="increase-quality" src="images/upvote.svg" alt="upvote card button" />
-//       <image class="btn btn-2" id="decrease-quality" src="images/downvote.svg" alt="downvote card button" />
-//       <p>Quality:</p>
-//       <p class="quality-current">&nbsp${card.quality}</p>
-//     </section>
-//     <img class="btn btn-2" id="close-idea-card" src="images/delete.svg" alt="delete card button"/>
-//   </section>
-//   </article>`
-//   }).join('');
-// }
+}
