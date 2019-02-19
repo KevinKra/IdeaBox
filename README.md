@@ -5,3 +5,4 @@ rated by pressing up or down and increasing or decreasing their quality. Idea ca
 
 # Desktop View
 
+![ideaboxdesktop](https://user-images.githubusercontent.com/42000931/53045461-ea060c80-344a-11e9-940d-69e6c13e7164.png)
