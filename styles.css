@@ -189,6 +189,11 @@ input, textarea, .idea-card {
 	margin-right: .7rem;
 }
 
+.input-content button {
+	display: block;
+	width: 130px;
+
+}
 
 
 

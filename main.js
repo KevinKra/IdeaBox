@@ -2,11 +2,17 @@
 const inputForm = document.querySelector('.input-form');
 var cardsContainer = document.querySelector('.output-content');
 const card = document.querySelector('.idea-card')
-var searchBar = document.querySelector(".search-bar");
+var searchBar = document.querySelector('.search-bar');
 let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
+var filterSwill = document.querySelector(".filter1");
+var filterPlausible = document.querySelector('.filter2');
+var filterGenius = document.querySelector('.filter3');
 
+filterSwill.addEventListener('click', filterCardsBySwill);
+filterPlausible.addEventListener('click', filterCardsByPlausible);
+filterGenius.addEventListener('click', filterCardsByGenius);
 
-searchBar.addEventListener("keyup", searchCards);
+searchBar.addEventListener('keyup', searchCards);
 inputForm.addEventListener('submit', collectInputs);
 cardsContainer.addEventListener('click', clickHandler);
 cardsContainer.addEventListener('keyup', editExistingCard);
@@ -143,3 +149,43 @@ function clearCards() {
     cardsContainer.removeChild(cardsContainer.lastChild);
   }
 }
+
+function filterCardsBySwill(e) {
+  var ideaBySpecificQuality = [];
+  clearCards();
+  for (var i = 0; i < ideas.length; i++) {
+    if(ideas[i].quality === "swill") {
+      ideaBySpecificQuality.push(ideas[i]);
+      appendCard(ideas[i]);
+    } 
+  }
+}
+
+function filterCardsByPlausible(e) {
+  var ideaBySpecificQuality = [];
+  clearCards();
+  for (var i = 0; i < ideas.length; i++) {
+    if(ideas[i].quality === "plausible") {
+      ideaBySpecificQuality.push(ideas[i]);
+      appendCard(ideas[i]);
+    } 
+  }
+}
+
+function filterCardsByGenius(e) {
+  var ideaBySpecificQuality = [];
+  clearCards();
+  for (var i = 0; i < ideas.length; i++) {
+    if(ideas[i].quality === "genius") {
+      ideaBySpecificQuality.push(ideas[i]);
+      appendCard(ideas[i]);
+    } 
+  }
+}
+
+
+
+
+
+
+
