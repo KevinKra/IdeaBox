@@ -8,9 +8,6 @@ class Idea {
   saveToStorage(ideas) {
     var stringifiedIdeas = JSON.stringify(ideas);
     localStorage.setItem("ideas", stringifiedIdeas);
-    //console.log(JSON.stringify(arry));
-    // JSON.stringify the idea object and assign to variable
-    // Set the stringified idea object in local storage using the idea object's id as the key
   }
   deleteFromStorage() {
    var i = ideas.indexOf(this); 
@@ -19,7 +16,7 @@ class Idea {
    localStorage.setItem("ideas", stringifiedIdeas);
   }
   updateContent() {
-    var index = ideas.indexOf(this); //this refers to targetIdea ~or associated context object
+    var index = ideas.indexOf(this);
     ideas.splice(index, 1, this);
   }
   updateQuality(quality) {

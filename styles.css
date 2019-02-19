@@ -1,4 +1,6 @@
-*, *:before, *:after {
+*, 
+*:before,
+*:after {
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
   outline: none;
@@ -10,7 +12,9 @@
   padding-right: 4px;
 }
 
-input, textarea, .idea-card {
+input,
+textarea,
+.idea-card {
   border: 2px solid #D2CCCD;
   border-radius: 5px;
   resize: none;
@@ -167,15 +171,15 @@ input, textarea, .idea-card {
 }
 
 .idea-card-title, .idea-card-paragraph {
-	padding: .5rem 1rem;
-  margin: 1rem .5rem;
 	color: #6E646B;
+	padding: .5rem 1rem;
 	transition: all .07s ease-in-out;
+  margin: 1rem .5rem;
 }
 
 .idea-card-paragraph:focus, .idea-card-title:focus {
-	outline: 2px solid #524649;
 	box-shadow: 0 0 10px grey;
+	outline: 2px solid #524649;
 }
 
 .btn-2 {
