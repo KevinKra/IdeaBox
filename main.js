@@ -127,14 +127,19 @@ function editExistingCard(e) {
 
 function searchCards(e){
   var searchBarText = e.target.value;
+  var regex = new RegExp(searchBarText, "i");
   var matchingIdeas = [];
-  while (cardsContainer.hasChildNodes()) {
-    cardsContainer.removeChild(cardsContainer.lastChild);
-  }
+  clearCards();
   for (var i = 0; i < ideas.length; i++) {
-    if(ideas[i].title === searchBarText) {
+    if(regex.test(ideas[i].title)) {
       matchingIdeas.push(ideas[i]);
       appendCard(ideas[i]);
     }
   }
 };
+
+function clearCards() {
+  while (cardsContainer.hasChildNodes()) {
+    cardsContainer.removeChild(cardsContainer.lastChild);
+  }
+}
