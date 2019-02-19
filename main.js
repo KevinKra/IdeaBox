@@ -132,7 +132,7 @@ function searchCards(e){
   var matchingIdeas = [];
   clearCards();
   for (var i = 0; i < ideas.length; i++) {
-    if(regex.test(ideas[i].title)) {
+    if(regex.test(ideas[i].title) || regex.test(ideas[i].body)) {
       matchingIdeas.push(ideas[i]);
       appendCard(ideas[i]);
     }
