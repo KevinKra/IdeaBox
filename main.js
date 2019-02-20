@@ -1,14 +1,16 @@
 
 const inputForm = document.querySelector('.input-form');
 const cardsContainer = document.querySelector('.output-content');
-const card = document.querySelector('.idea-card')
+const card = document.querySelector('.idea-card');
 const searchBar = document.querySelector('.search-bar');
 let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
+
 
 searchBar.addEventListener('keyup', searchCards);
 inputForm.addEventListener('click', collectInputs);
 cardsContainer.addEventListener('click', clickHandler);
 cardsContainer.addEventListener('keyup', editExistingCard);
+
 restoreObject(ideas);
 
 function restoreObject(parsedIdeas) {
@@ -75,7 +77,7 @@ function downVote(e) {
     qualityText.innerHTML = "&nbspswill";
     ideaToDownvote.updateQuality("swill");
   }
-};
+}
 
 function findIdea(e) {
  let dataIndex = parseInt(e.target.closest(".idea-card").getAttribute("data-index"));
@@ -128,9 +130,9 @@ function editExistingCard(e) {
   var targetIdea = findIdea(e);
   var newValue = e.target.innerHTML;
   if(e.target.className === "idea-card-title") {
-      targetIdea.title = newValue;
+    targetIdea.title = newValue;
   } if (e.target.className === "idea-card-paragraph") {
-      targetIdea.body = newValue;
+    targetIdea.body = newValue;
   }
   targetIdea.updateContent();
   targetIdea.saveToStorage(ideas);
