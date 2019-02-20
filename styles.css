@@ -210,8 +210,9 @@ textarea,
 	margin-right: .7rem;
 }
 
-#show-more {
-	display: none;
+#show-more,
+#show-less {
+	display: block;
 	background-color: #6E646B;
   border: 0;
 	color: #fff;
@@ -220,8 +221,13 @@ textarea,
   margin: 1.5rem auto;
   padding: .5rem 1rem;
   border-radius: 5px;
+  cursor: pointer;
 }
 
+#show-more,
+#show-less {
+	display: none;
+}
 
 
 @media screen and (max-width: 600px) {
