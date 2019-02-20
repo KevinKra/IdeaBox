@@ -53,7 +53,7 @@ textarea,
 	display: flex;
 	justify-content: space-between;
 	margin: 0 auto;
-	width: 70%;
+	width: 65%;
 }
 
 .header-title {
@@ -137,6 +137,23 @@ textarea,
 	background-color: #524649;
 }
 
+.filter-container {
+	display: flex;
+  justify-content: space-between;
+}
+
+.filter-container button {
+	background-color: #6E646B;
+  border: 0;
+  color: #fff;
+  font-size: 1.35em;
+  font-weight: 800;
+  margin: 1.5rem 0;
+  padding: .5rem 1rem;
+  border-radius: 5px;
+
+}
+
 .disabled {
 	
 }
@@ -193,13 +210,52 @@ textarea,
 	margin-right: .7rem;
 }
 
-.input-content button {
-	display: block;
-	width: 130px;
+
+
+
+
+@media screen and (max-width: 600px) {
+
+	.header-title h1 {
+		font-size: 2em;
+	}
+
+	.filter-container {
+		flex-direction: column;
+
+	}
+
+	.filter-container button {
+		margin: .5em 0;
+	}
+
+	.idea-card {
+		min-width: 0;
+		width: 90%;
+	}
 
 }
 
+@media screen and (max-width: 850px) {
+	
+	.top-nav {
+		flex-direction: column;
+	}
 
+	.top-nav form{
+		margin-bottom: 2em;
+	}
+
+	.input-form {
+		min-width: 0;
+		width: 90%;
+	}
+
+	.idea-card {
+		min-width: 0;
+		width: 90%;
+	}
+}
 
 
 
