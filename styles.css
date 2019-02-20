@@ -206,7 +206,17 @@ input, textarea, .idea-card {
 	margin-right: .7rem;
 }
 
-
+#show-more {
+	display: none;
+	background-color: #6E646B;
+  border: 0;
+	color: #fff;
+	font-size: 1.35em;
+  font-weight: 800;
+  margin: 1.5rem auto;
+  padding: .5rem 1rem;
+  border-radius: 5px;
+}
 
 
 
