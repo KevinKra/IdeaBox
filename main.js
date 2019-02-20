@@ -4,7 +4,9 @@ const cardsContainer = document.querySelector('.output-content');
 const card = document.querySelector('.idea-card');
 const searchBar = document.querySelector('.search-bar');
 let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
-let ideaCounter = 11;
+let ideaCounter = 10;
+const showMore = document.querySelector("#show-more");
+const showLess = document.querySelector("#show-less");
 
 
 searchBar.addEventListener('keyup', searchCards);
@@ -24,17 +26,20 @@ function restoreObject(parsedIdeas) {
 };
 
 function clickHandler(e) {
-  if (e.target.id === "close-idea-card") {
+  if (e.target.id === 'close-idea-card') {
     deleteIdea(e);
   }
-  if (e.target.id === "increase-quality") {
+  if (e.target.id === 'increase-quality') {
     upVote(e);
   }
-  if (e.target.id === "decrease-quality") {
+  if (e.target.id === 'decrease-quality') {
     downVote(e);
   }
-  if (e.target.id === "show-more") {
+  if (e.target.id === 'show-more') {
     showMoreCards();
+  }
+  if (e.target.id === 'show-less') {
+    showLessCards();
   }
 };
 
@@ -42,6 +47,9 @@ function deleteIdea(e) {
   e.target.closest(".idea-card").remove();
   var ideaToRemove = findIdea(e);
   ideaToRemove.deleteFromStorage();
+  if (ideas.length < 10) {
+    showMore.style.display = "none";
+  }
 };
 
 function upVote(e) {
@@ -92,7 +100,6 @@ function findIdea(e) {
 
 function collectInputs(e) {
   e.preventDefault();
-  console.log(e.target.classList.contains("btn-save-idea"));
   if (e.target.className === "fswill") {
       filterCardsByQuality("swill");
   } 
@@ -114,13 +121,16 @@ function collectInputs(e) {
 };
 
 function appendCard(card) {
-  var showMore = document.querySelector("#show-more");
-  showMore.style.display = "none";
-  if(ideas.length >= ideaCounter) {
-   showMore.style.display = "block";
-   return;
-}
-    var displayCard = `<article class="idea-card" data-index=${card.index}>
+  console.log(cardsContainer.children.length);
+  if (cardsContainer.children.length - 1 > ideaCounter) {
+    showMore.style.display = "block";
+    showLess.style.display = 'none';
+    return;
+  } else {
+    showMore.style.display = 'none';
+    showLess.style.display = 'block';
+  }
+  var displayCard = `<article class="idea-card" data-index=${card.index}>
   <h2 class="idea-card-title" contentEditable="true">${card.title}</h2>
   <p class="idea-card-paragraph" contentEditable="true">${card.body}</p>
   <section class="idea-card-footer">
@@ -162,9 +172,10 @@ function searchCards(e){
 };
 
 function clearCards() {
-  while (cardsContainer.hasChildNodes()) {
-    cardsContainer.removeChild(cardsContainer.lastChild);
-  }
+  var ideasToDelete = cardsContainer.querySelectorAll('.idea-card');
+  ideasToDelete.forEach(function(idea) {
+    idea.remove();
+  });
 }
 
 function filterCardsByQuality(quality) {
@@ -179,8 +190,21 @@ function filterCardsByQuality(quality) {
 }
 
 function showMoreCards() {
+  clearCards();
+  ideaCounter = 100;
+  for (let i = 0; i < ideas.length; i++) {
+    appendCard(ideas[i]);
+  }
+  showLess.style.display = "block";
+  console.log(showMore.id)
+}
 
-
+function showLessCards() {
+  clearCards();
+  ideaCounter = 10;
+  for (let i = 0; i < ideas.length; i++) {
+    appendCard(ideas[i]);
+  }
 }
 
 
