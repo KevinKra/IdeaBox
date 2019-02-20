@@ -1,19 +1,12 @@
 
 const inputForm = document.querySelector('.input-form');
-var cardsContainer = document.querySelector('.output-content');
+const cardsContainer = document.querySelector('.output-content');
 const card = document.querySelector('.idea-card')
-var searchBar = document.querySelector('.search-bar');
+const searchBar = document.querySelector('.search-bar');
 let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
-var filterSwill = document.querySelector(".filter1");
-var filterPlausible = document.querySelector('.filter2');
-var filterGenius = document.querySelector('.filter3');
-
-filterSwill.addEventListener('click', filterCardsBySwill);
-filterPlausible.addEventListener('click', filterCardsByPlausible);
-filterGenius.addEventListener('click', filterCardsByGenius);
 
 searchBar.addEventListener('keyup', searchCards);
-inputForm.addEventListener('submit', collectInputs);
+inputForm.addEventListener('click', collectInputs);
 cardsContainer.addEventListener('click', clickHandler);
 cardsContainer.addEventListener('keyup', editExistingCard);
 restoreObject(ideas);
@@ -93,6 +86,17 @@ function findIdea(e) {
 
 function collectInputs(e) {
   e.preventDefault();
+  console.log(e.target.classList.contains("btn-save-idea"));
+  if (e.target.className === "fswill") {
+      filterCardsByQuality("swill");
+  } 
+  if (e.target.className === "fplausible") {
+      filterCardsByQuality("plausible");
+  } 
+  if (e.target.className === "fgenius") {
+      filterCardsByQuality("genius");
+  }
+  if (e.target.classList.contains("btn-save-idea")) {
   var title = document.querySelector('#title-input').value;
   var body = document.querySelector('#body-textarea').value;
   const newIdea = new Idea(title, body, Date.now());
@@ -100,6 +104,7 @@ function collectInputs(e) {
   newIdea.saveToStorage(ideas);
   appendCard(newIdea);
   this.reset();
+  }
 };
 
 function appendCard(card) {
@@ -136,7 +141,7 @@ function searchCards(e){
   var regex = new RegExp(searchBarText, "i");
   var matchingIdeas = [];
   clearCards();
-  for (var i = 0; i < ideas.length; i++) {
+  for (let i = 0; i < ideas.length; i++) {
     if(regex.test(ideas[i].title) || regex.test(ideas[i].body)) {
       matchingIdeas.push(ideas[i]);
       appendCard(ideas[i]);
@@ -150,38 +155,17 @@ function clearCards() {
   }
 }
 
-function filterCardsBySwill(e) {
+function filterCardsByQuality(quality) {
   var ideaBySpecificQuality = [];
   clearCards();
-  for (var i = 0; i < ideas.length; i++) {
-    if(ideas[i].quality === "swill") {
+  for (let i = 0; i < ideas.length; i++) {
+    if(ideas[i].quality === quality) {
       ideaBySpecificQuality.push(ideas[i]);
       appendCard(ideas[i]);
     } 
   }
 }
 
-function filterCardsByPlausible(e) {
-  var ideaBySpecificQuality = [];
-  clearCards();
-  for (var i = 0; i < ideas.length; i++) {
-    if(ideas[i].quality === "plausible") {
-      ideaBySpecificQuality.push(ideas[i]);
-      appendCard(ideas[i]);
-    } 
-  }
-}
-
-function filterCardsByGenius(e) {
-  var ideaBySpecificQuality = [];
-  clearCards();
-  for (var i = 0; i < ideas.length; i++) {
-    if(ideas[i].quality === "genius") {
-      ideaBySpecificQuality.push(ideas[i]);
-      appendCard(ideas[i]);
-    } 
-  }
-}
 
 
 
