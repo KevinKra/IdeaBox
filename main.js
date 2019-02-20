@@ -4,6 +4,7 @@ const cardsContainer = document.querySelector('.output-content');
 const card = document.querySelector('.idea-card');
 const searchBar = document.querySelector('.search-bar');
 let ideas = JSON.parse(localStorage.getItem("ideas")) || [];
+let ideaCounter = 11;
 
 
 searchBar.addEventListener('keyup', searchCards);
@@ -31,6 +32,9 @@ function clickHandler(e) {
   }
   if (e.target.id === "decrease-quality") {
     downVote(e);
+  }
+  if (e.target.id === "show-more") {
+    showMoreCards();
   }
 };
 
@@ -110,6 +114,12 @@ function collectInputs(e) {
 };
 
 function appendCard(card) {
+  var showMore = document.querySelector("#show-more");
+  showMore.style.display = "none";
+  if(ideas.length >= ideaCounter) {
+   showMore.style.display = "block";
+   return;
+}
     var displayCard = `<article class="idea-card" data-index=${card.index}>
   <h2 class="idea-card-title" contentEditable="true">${card.title}</h2>
   <p class="idea-card-paragraph" contentEditable="true">${card.body}</p>
@@ -168,6 +178,10 @@ function filterCardsByQuality(quality) {
   }
 }
 
+function showMoreCards() {
+
+
+}
 
 
 
