@@ -5,6 +5,11 @@ filters idea cards in real time. Users can search for either the title or descri
 rated by pressing up or down and increasing or decreasing their quality. Idea cards can be sorted by importance or most recent. 
 
 # Features
+* Add and Delete Cards
+* Rate the Quality of the Ideas (swill, plausible, genius)
+* Filter Cards by Quality
+* Show More or Less Cards
+* Search Cards by Idea Title or Body
 
 # Desktop View
 
