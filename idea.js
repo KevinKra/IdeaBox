@@ -10,10 +10,10 @@ class Idea {
     localStorage.setItem("ideas", stringifiedIdeas);
   }
   deleteFromStorage() {
-   var i = ideas.indexOf(this); 
-   ideas.splice(i, 1);
-   var stringifiedIdeas = JSON.stringify(ideas);
-   localStorage.setItem("ideas", stringifiedIdeas);
+    var i = ideas.indexOf(this); 
+    ideas.splice(i, 1);
+    var stringifiedIdeas = JSON.stringify(ideas);
+    localStorage.setItem("ideas", stringifiedIdeas);
   }
   updateContent() {
     var index = ideas.indexOf(this);
