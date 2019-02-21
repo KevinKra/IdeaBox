@@ -46,7 +46,6 @@ function clickHandler(e) {
 function deleteIdea(e) {
   e.target.closest(".idea-card").remove();
   var ideaToRemove = findIdea(e);
-  console.log("delete", cardsContainer.children.length - 2);
   ideaToRemove.deleteFromStorage();
   if (cardsContainer.children.length - 2 <= 10) {
     showMore.style.display = "none";
@@ -108,7 +107,6 @@ function collectInputs(e) {
 };
 
 function appendCard(card) {
-  console.log("add", cardsContainer.children.length - 1);
   if (cardsContainer.children.length - 1 > ideaCounter) {
     showMore.style.display = "block";
     showLess.style.display = 'none';

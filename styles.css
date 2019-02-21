@@ -38,9 +38,9 @@ textarea,
 }
 
 .btn:active {
-	transition: .01s ease;
-	color: #ddd;
 	background-color: #222;
+	color: #ddd;
+	transition: .01s ease;
 }
 
 /* === header content ===*/
@@ -82,8 +82,8 @@ textarea,
 }
 
 .top-nav-form input {
-	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
+	border-top-right-radius: 0;
 }
 
 .fa-search {
@@ -212,16 +212,16 @@ textarea,
 
 #show-more,
 #show-less {
-	display: block;
 	background-color: #6E646B;
-  border: 0;
 	color: #fff;
+	display: block;
 	font-size: 1.35em;
+  border-radius: 5px;
+  border: 0;
+  cursor: pointer;
   font-weight: 800;
   margin: 1.5rem auto;
   padding: .5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 #show-more,
