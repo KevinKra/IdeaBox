@@ -17,4 +17,5 @@ rated by pressing up or down and increasing or decreasing their quality. Idea ca
 
 # Mobile View
 
-![mobileview](https://user-images.githubusercontent.com/42000931/53135467-8528e000-3538-11e9-896a-3a3a6aa361eb.png)
+![mobile](https://user-images.githubusercontent.com/42000931/53135620-2b74e580-3539-11e9-87b8-1c3e00b5f3e4.png)
+
