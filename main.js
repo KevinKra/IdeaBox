@@ -46,9 +46,11 @@ function clickHandler(e) {
 function deleteIdea(e) {
   e.target.closest(".idea-card").remove();
   var ideaToRemove = findIdea(e);
+  console.log("delete", cardsContainer.children.length - 2);
   ideaToRemove.deleteFromStorage();
-  if (ideas.length < 10) {
+  if (cardsContainer.children.length - 2 <= 10) {
     showMore.style.display = "none";
+    showLess.style.display = "none";
   }
 };
 
@@ -63,21 +65,6 @@ function upVote(e) {
     ideaToUpvote.updateQuality("genius");
   }
 };
-
-/* POTENTIAL SOLUTION TO "nextElementSibling" CHAIN ISSUE */
-// function upVote(e) {
-//   var ideaToUpvote = findIdea(e);
-//   if (!e.target.id === "increase-quality") return;
-//   //var qualityText = cardsContainer.querySelector('.current-quality');
-//   console.log(qualityText);
-//   if (ideaToUpvote.quality === "swill") {
-//     qualityText.innerHTML = "&nbspplausible";
-//     ideaToUpvote.updateQuality("plausible");
-//   } else if(ideaToUpvote.quality === "plausible") {
-//     qualityText.innerHTML = "&nbspgenius";
-//     ideaToUpvote.updateQuality("genius");
-//   }
-// }
 
 function downVote(e) {
   var ideaToDownvote = findIdea(e);
@@ -121,14 +108,17 @@ function collectInputs(e) {
 };
 
 function appendCard(card) {
-  console.log(cardsContainer.children.length);
+  console.log("add", cardsContainer.children.length - 1);
   if (cardsContainer.children.length - 1 > ideaCounter) {
     showMore.style.display = "block";
     showLess.style.display = 'none';
     return;
-  } else {
+  } else if (cardsContainer.children.length - 1 >= 11) {
     showMore.style.display = 'none';
     showLess.style.display = 'block';
+  } else {
+    showMore.style.display = 'none';
+    showLess.style.display = 'none';
   }
   var displayCard = `<article class="idea-card" data-index=${card.index}>
   <h2 class="idea-card-title" contentEditable="true">${card.title}</h2>
@@ -195,8 +185,6 @@ function showMoreCards() {
   for (let i = 0; i < ideas.length; i++) {
     appendCard(ideas[i]);
   }
-  showLess.style.display = "block";
-  console.log(showMore.id)
 }
 
 function showLessCards() {
