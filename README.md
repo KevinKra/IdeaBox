@@ -2,7 +2,7 @@
 You can think of Ideabox as a cooler version of twitter. A user can enter a title and description of their idea and click save.
 Upon doing this their idea appears as the most recent idea card. Users can search for past ideas using the searchbar, which 
 filters idea cards in real time. Users can search for either the title or description of an idea. Furthermore, ideas can be 
-rated by pressing up or down and increasing or decreasing their quality. If you only like genius ideas, then you can filter cards by that quality, or any other. 
+rated by pressing up or down and increasing or decreasing their quality. If you only like genius ideas, then you can filter cards by that quality, or any other quality if you so desire.
 
 # Features
 * Add and Delete Cards
